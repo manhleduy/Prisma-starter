@@ -6,8 +6,18 @@ app.use(express.json());
 
 
 app.get("/users", async (req, res)=>{
-    const users= await prisma.user.findMany();
+    const users= await prisma.user.findMany({
+    
+    });
     res.json(users);
+})
+app.get("/users/:id", async (req, res)=>{
+    const user= await prisma.user.findFirst({
+        where:{
+            id: Number(req.params.id)
+        }
+    })
+    res.json(user);
 })
 app.listen(4000,()=>{
     console.log("server is running on port 3000");
