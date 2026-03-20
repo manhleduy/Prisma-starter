@@ -19,6 +19,7 @@ model User {
   craeted_at DateTime @default(now())
   posts      Post[]
   homes      Home[]
+  cars       Car[]
 }
 
 model Post {
@@ -30,11 +31,20 @@ model Post {
   authorId  Int
 }
 
-model Home{
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  location  String
-  owner     User    @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "ownerId")
+model Home {
+  id       Int     @id @default(autoincrement())
+  title    String
+  content  String?
+  location String
+  owner    User    @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "ownerId")
+  ownerId  Int
+}
+
+model Car {
+  id        Int      @id @default(autoincrement()) @map("car_id")
+  origin    String
+  power     Int
+  bought_at DateTime @default(now())
+  owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "ownerId")
   ownerId   Int
 }

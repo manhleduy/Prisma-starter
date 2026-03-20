@@ -14,6 +14,7 @@ async function main() {
           {
             title: "My second post", 
             content: "This is still a draft", 
+        
           }, 
         ], 
       }, 
